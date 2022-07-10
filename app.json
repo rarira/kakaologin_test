@@ -15,9 +15,8 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
+    "plugins": ["./plugins/"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.rariradev.kakaologintest"

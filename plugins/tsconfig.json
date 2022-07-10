@@ -1,0 +1,15 @@
+{
+  "include": ["**/*.ts"],
+  "extends": "expo-module-scripts/tsconfig.plugin"
+  // "compilerOptions": {
+  //   "allowJs": true,
+  //   "esModuleInterop": true,
+  //   "lib": ["DOM", "ESNext"],
+  //   "module": "commonjs",
+  //   "moduleResolution": "node",
+  //   "noEmit": false,
+  //   "resolveJsonModule": true,
+  //   "skipLibCheck": true,
+  //   "target": "ESNext"
+  // }
+}
