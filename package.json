@@ -5,8 +5,8 @@
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
-    "build:ios": "eas build --platform ios --profile development",
-    "build:android": "eas build --platform android --profile development",
+    "build:ios": "eas build --platform ios --profile local",
+    "build:android": "eas build --platform android --profile local",
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject"
@@ -17,7 +17,8 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-native": "0.68.2",
-    "react-native-web": "0.17.7"
+    "react-native-web": "0.17.7",
+    "expo-dev-client": "~1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
