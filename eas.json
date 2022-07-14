@@ -2,7 +2,7 @@
   "build": {
     "local": {
       "developmentClient": true,
-      "distribution": "local",
+      "releaseChannel": "local",
       "ios": {
         "simulator": true
       }
