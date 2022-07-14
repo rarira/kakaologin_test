@@ -16,7 +16,15 @@
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": ["**/*"],
-    "plugins": ["./plugins/"],
+    "plugins": [
+      [
+        "./plugins/",
+        {
+          "kakaoAppKey": "7d0c8758bb3f4be83552b9351e3b9a62",
+          "overrideKakaoSDKVersion": "2.3.1"
+        }
+      ]
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.rariradev.kakaologintest"
@@ -25,7 +33,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.rariradev.kakaologintest"
     },
     "web": {
       "favicon": "./assets/favicon.png"

@@ -1,20 +1,21 @@
 {
   "name": "kakaologintest",
   "version": "1.0.0",
-  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
+    "start": "expo start --dev-client",
+    "android": "expo run:android",
     "tsc:config": "tsc -P ./plugins",
     "build:ios": "eas build --platform ios --profile local",
     "build:android": "eas build --platform android --profile local",
-    "ios": "expo start --ios",
+    "ios": "expo run:ios",
     "web": "expo start --web",
     "eject": "expo eject"
   },
   "dependencies": {
+    "@expo/config-plugins": "^4.1.5",
     "expo": "~45.0.0",
     "expo-dev-client": "~1.0.0",
+    "expo-splash-screen": "~0.15.1",
     "expo-status-bar": "~1.3.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
