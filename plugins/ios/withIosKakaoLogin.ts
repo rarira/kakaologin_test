@@ -55,7 +55,16 @@ const modifyInfoPlist: ConfigPlugin<KakaoLoginPluginProps> = (
 const modifyAppDelegate: ConfigPlugin = (config) => {
   const modifyContents = (contents: string) => {
     if (!contents.includes(KAKAO_HEADER_IMPORT_STRING)) {
-      contents = `${KAKAO_HEADER_IMPORT_STRING}\n`.concat(contents);
+      contents = contents.replace(
+        "#if",
+        `
+      ${KAKAO_HEADER_IMPORT_STRING}
+      #if`
+      );
+      // contents = contents.replace(
+      //   /^(?:[\s\S]*\n)?\#import.*(?:\r?\n|\r)/gm,
+      //   `$&${KAKAO_HEADER_IMPORT_STRING}\n`
+      // );
     }
 
     if (!contents.includes(KAKAO_LINKING_STRING))
