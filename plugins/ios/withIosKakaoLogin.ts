@@ -19,9 +19,9 @@ const KAKAO_LINKING_STRING = `if([RNKakaoLogins isKakaoTalkLoginUrl:url]) {
 
 const KAKAO_SDK_VERSION_STRING = "$KakaoSDKVersion";
 
-const readFileAsync = async (path): Promise<string> => {
+const readFileAsync = async (path: string): Promise<string> => {
   return new Promise((resolve, reject) => {
-    fs.readFile(path, "utf8", (err, data) => {
+    fs.readFile(path, "utf8", (err: any, data: string) => {
       if (err || !data) {
         console.error("Couldn't read file:" + path);
         reject(err);
