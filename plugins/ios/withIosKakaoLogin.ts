@@ -3,8 +3,11 @@ import {
   WarningAggregator,
   withAppDelegate,
   withInfoPlist,
+  withXcodeProject,
 } from "@expo/config-plugins";
 import { KakaoLoginPluginProps } from "..";
+import fs from "fs";
+import path from "path";
 
 const KAKAO_SCHEMES = ["kakaokompassauth", "storykompassauth", "kakaolink"];
 
@@ -13,6 +16,22 @@ const KAKAO_HEADER_IMPORT_STRING = "#import <RNKakaoLogins.h>";
 const KAKAO_LINKING_STRING = `if([RNKakaoLogins isKakaoTalkLoginUrl:url]) {
   return [RNKakaoLogins handleOpenUrl: url];
 }`;
+
+const KAKAO_SDK_VERSION_STRING = "$KakaoSDKVersion";
+
+const readFileAsync = async (path): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    fs.readFile(path, "utf8", (err, data) => {
+      if (err || !data) {
+        console.error("Couldn't read file:" + path);
+        reject(err);
+        return;
+      }
+      resolve(data);
+    });
+  });
+};
+
 const modifyInfoPlist: ConfigPlugin<KakaoLoginPluginProps> = (
   config,
   props
@@ -89,12 +108,39 @@ const modifyAppDelegate: ConfigPlugin = (config) => {
   });
 };
 
+const modifyPodfile: ConfigPlugin<KakaoLoginPluginProps> = (config, props) => {
+  config = withXcodeProject(config, async (_props) => {
+    const iosPath = _props.modRequest.platformProjectRoot;
+    const podfile = await readFileAsync(`${iosPath}/Podfile`);
+    const matches = podfile.match(KAKAO_SDK_VERSION_STRING);
+
+    if (!matches) {
+      fs.appendFile(
+        `${iosPath}/Podfile`,
+        `${KAKAO_SDK_VERSION_STRING}=${props.overriderKakaoSDKVersion!}`,
+        (err) => {
+          if (err) {
+            console.error("Error writing to Podfile");
+          }
+        }
+      );
+    }
+
+    return _props;
+  });
+
+  return config;
+};
+
 export const withIosKakaoLogin: ConfigPlugin<KakaoLoginPluginProps> = (
   config,
   props
 ) => {
   config = modifyInfoPlist(config, props);
   config = modifyAppDelegate(config);
+  if (props.overriderKakaoSDKVersion) {
+    config = modifyPodfile(config, props);
+  }
 
   return config;
 };

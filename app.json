@@ -21,7 +21,7 @@
         "./plugins/",
         {
           "kakaoAppKey": "7d0c8758bb3f4be83552b9351e3b9a62",
-          "overrideKakaoSDKVersion": "2.3.1"
+          "overrideKakaoSDKVersion": "2.11.0"
         }
       ]
     ],
