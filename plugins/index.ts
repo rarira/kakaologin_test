@@ -3,7 +3,7 @@ import type { ConfigPlugin } from "@expo/config-plugins";
 
 export interface KakaoLoginPluginProps {
   kakaoAppKey: string;
-  overriderKakaoSDKVersion?: string;
+  overrideKakaoSDKVersion?: string;
 }
 
 const withPlugins: ConfigPlugin<KakaoLoginPluginProps> = (config, props) => {

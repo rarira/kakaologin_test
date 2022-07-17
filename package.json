@@ -1,11 +1,12 @@
 {
   "name": "kakaologintest",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "scripts": {
     "start": "expo start --dev-client",
     "android": "expo run:android",
     "tsc:config": "tsc -P ./plugins",
     "build:ios": "eas build --platform ios --profile local",
+    "build:device:ios": "eas build -p ios --profile local:device",
     "build:android": "eas build --platform android --profile local",
     "ios": "expo run:ios",
     "web": "expo start --web",

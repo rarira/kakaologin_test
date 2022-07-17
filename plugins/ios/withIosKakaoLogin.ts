@@ -6,8 +6,7 @@ import {
   withXcodeProject,
 } from "@expo/config-plugins";
 import { KakaoLoginPluginProps } from "..";
-import fs from "fs";
-import path from "path";
+import { readFile, writeFile } from "node:fs";
 
 const KAKAO_SCHEMES = ["kakaokompassauth", "storykompassauth", "kakaolink"];
 
@@ -19,15 +18,30 @@ const KAKAO_LINKING_STRING = `if([RNKakaoLogins isKakaoTalkLoginUrl:url]) {
 
 const KAKAO_SDK_VERSION_STRING = "$KakaoSDKVersion";
 
+const KAKAO_SDK_VERSION_REGEX = /\$KakaoSDKVersion\=.*(\r\n|\r|\n)/g;
+
 const readFileAsync = async (path: string): Promise<string> => {
   return new Promise((resolve, reject) => {
-    fs.readFile(path, "utf8", (err: any, data: string) => {
+    readFile(path, "utf8", (err: any, data: string) => {
       if (err || !data) {
         console.error("Couldn't read file:" + path);
         reject(err);
         return;
       }
       resolve(data);
+    });
+  });
+};
+
+const writeFileAsync = async (path: string, data: string): Promise<void> => {
+  return new Promise((resolve, reject) => {
+    writeFile(path, data, (err: any) => {
+      if (err) {
+        console.error("Couldn't write file:" + path);
+        reject(err);
+        return;
+      }
+      resolve();
     });
   });
 };
@@ -80,10 +94,6 @@ const modifyAppDelegate: ConfigPlugin = (config) => {
       ${KAKAO_HEADER_IMPORT_STRING}
       #if`
       );
-      // contents = contents.replace(
-      //   /^(?:[\s\S]*\n)?\#import.*(?:\r?\n|\r)/gm,
-      //   `$&${KAKAO_HEADER_IMPORT_STRING}\n`
-      // );
     }
 
     if (!contents.includes(KAKAO_LINKING_STRING))
@@ -112,18 +122,16 @@ const modifyPodfile: ConfigPlugin<KakaoLoginPluginProps> = (config, props) => {
   config = withXcodeProject(config, async (_props) => {
     const iosPath = _props.modRequest.platformProjectRoot;
     const podfile = await readFileAsync(`${iosPath}/Podfile`);
-    const matches = podfile.match(KAKAO_SDK_VERSION_STRING);
 
-    if (!matches) {
-      fs.appendFile(
-        `${iosPath}/Podfile`,
-        `${KAKAO_SDK_VERSION_STRING}=${props.overriderKakaoSDKVersion!}`,
-        (err) => {
-          if (err) {
-            console.error("Error writing to Podfile");
-          }
-        }
+    const removedPodfile = podfile.replace(KAKAO_SDK_VERSION_REGEX, "");
+
+    if (props.overrideKakaoSDKVersion) {
+      const newPodfile = removedPodfile.concat(
+        `${KAKAO_SDK_VERSION_STRING}="${props.overrideKakaoSDKVersion!}"\n`
       );
+      await writeFileAsync(`${iosPath}/Podfile`, newPodfile);
+    } else {
+      await writeFileAsync(`${iosPath}/Podfile`, removedPodfile);
     }
 
     return _props;
@@ -138,9 +146,7 @@ export const withIosKakaoLogin: ConfigPlugin<KakaoLoginPluginProps> = (
 ) => {
   config = modifyInfoPlist(config, props);
   config = modifyAppDelegate(config);
-  if (props.overriderKakaoSDKVersion) {
-    config = modifyPodfile(config, props);
-  }
+  config = modifyPodfile(config, props);
 
   return config;
 };
