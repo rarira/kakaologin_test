@@ -5,9 +5,6 @@
       "releaseChannel": "local",
       "ios": {
         "simulator": true
-      },
-      "cache": {
-        "enabled": false
       }
     },
     "local:device": {
