@@ -3,7 +3,7 @@
     "name": "kakaologintest",
     "slug": "kakaologintest",
     "owner": "rariradev",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -20,7 +20,8 @@
       [
         "./plugins/",
         {
-          "kakaoAppKey": "7d0c8758bb3f4be83552b9351e3b9a62"
+          "kakaoAppKey": "7d0c8758bb3f4be83552b9351e3b9a62",
+          "overrideKakaoSDKVersion": "2.9.0"
         }
       ]
     ],

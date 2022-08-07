@@ -1,3 +1,4 @@
+import { withAndrodKakaoLogin } from "./android/withAndroidKakaoLogin";
 import { withIosKakaoLogin } from "./ios/withIosKakaoLogin";
 import type { ConfigPlugin } from "@expo/config-plugins";
 
@@ -8,6 +9,7 @@ export interface KakaoLoginPluginProps {
 
 const withPlugins: ConfigPlugin<KakaoLoginPluginProps> = (config, props) => {
   config = withIosKakaoLogin(config, props);
+  config = withAndrodKakaoLogin(config, props);
   return config;
 };
 
