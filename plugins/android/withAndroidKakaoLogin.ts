@@ -87,30 +87,30 @@ const modifyProjectBuildGradle: ConfigPlugin<KakaoLoginPluginProps> = (
   config,
   props
 ) => {
-  config = withGradleProperties(config, (config) => {
-    AndroidConfig.BuildProperties.updateAndroidBuildProperty(
-      config.modResults,
-      "android.kotlinVersion",
-      "1.7.10"
-    );
+  //   config = withGradleProperties(config, (config) => {
+  //     AndroidConfig.BuildProperties.updateAndroidBuildProperty(
+  //       config.modResults,
+  //       "android.kotlinVersion",
+  //       "1.7.10"
+  //     );
 
-    return config;
-  });
+  //     return config;
+  //   });
 
-  config = withProjectBuildGradle(config, (config) => {
-    if (
-      !config.modResults.contents.includes(
-        "org.jetbrains.kotlin:kotlin-gradle-plugin:"
-      )
-    ) {
-      config.modResults.contents = config.modResults.contents.replace(
-        /dependencies\s?{/,
-        `dependencies {
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10'`
-      );
-    }
-    return config;
-  });
+  //   config = withProjectBuildGradle(config, (config) => {
+  //     if (
+  //       !config.modResults.contents.includes(
+  //         "org.jetbrains.kotlin:kotlin-gradle-plugin:"
+  //       )
+  //     ) {
+  //       config.modResults.contents = config.modResults.contents.replace(
+  //         /dependencies\s?{/,
+  //         `dependencies {
+  //         classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10'`
+  //       );
+  //     }
+  //     return config;
+  //   });
 
   if (props.overrideKakaoSDKVersion) {
     config = withProjectBuildGradle(config, (config) => {
