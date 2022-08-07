@@ -65,20 +65,13 @@ const modifyProjectBuildGradle = (config, props) => {
     //     );
     //     return config;
     //   });
-    //   config = withProjectBuildGradle(config, (config) => {
-    //     if (
-    //       !config.modResults.contents.includes(
-    //         "org.jetbrains.kotlin:kotlin-gradle-plugin:"
-    //       )
-    //     ) {
-    //       config.modResults.contents = config.modResults.contents.replace(
-    //         /dependencies\s?{/,
-    //         `dependencies {
-    //         classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10'`
-    //       );
-    //     }
-    //     return config;
-    //   });
+    config = config_plugins_1.withProjectBuildGradle(config, (config) => {
+        if (!config.modResults.contents.includes("org.jetbrains.kotlin:kotlin-gradle-plugin:")) {
+            config.modResults.contents = config.modResults.contents.replace(/dependencies\s?{/, `dependencies {
+          classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.41`);
+        }
+        return config;
+    });
     if (props.overrideKakaoSDKVersion) {
         config = config_plugins_1.withProjectBuildGradle(config, (config) => {
             var _a, _b, _c;
