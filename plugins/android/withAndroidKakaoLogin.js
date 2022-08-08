@@ -58,14 +58,14 @@ const modifyAndroidStrings = (config, props) => {
 };
 const modifyProjectBuildGradle = (config, props) => {
     config = config_plugins_1.withGradleProperties(config, (config) => {
-        config_plugins_1.AndroidConfig.BuildProperties.updateAndroidBuildProperty(config.modResults, "android.kotlinVersion", "1.4.1");
+        config_plugins_1.AndroidConfig.BuildProperties.updateAndroidBuildProperty(config.modResults, "android.kotlinVersion", "1.5.10");
         return config;
     });
     config = config_plugins_1.withProjectBuildGradle(config, (config) => {
         if (!config.modResults.contents.includes("org.jetbrains.kotlin:kotlin-gradle-plugin:")) {
             config.modResults.contents = config.modResults.contents.replace(`buildToolsVersion = "29.0.3"`, `buildToolsVersion = "30.0.0"`);
             config.modResults.contents = config.modResults.contents.replace(/dependencies\s?{/, `dependencies {
-          classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.1'`);
+          classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.10'`);
         }
         return config;
     });
