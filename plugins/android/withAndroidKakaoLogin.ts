@@ -104,6 +104,10 @@ const modifyProjectBuildGradle: ConfigPlugin<KakaoLoginPluginProps> = (
       )
     ) {
       config.modResults.contents = config.modResults.contents.replace(
+        `buildToolsVersion = "29.0.3"`,
+        `buildToolsVersion = "30.0.0"`
+      );
+      config.modResults.contents = config.modResults.contents.replace(
         /dependencies\s?{/,
         `dependencies {
           classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.0'`
