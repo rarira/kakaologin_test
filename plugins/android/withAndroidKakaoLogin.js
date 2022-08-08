@@ -57,18 +57,14 @@ const modifyAndroidStrings = (config, props) => {
     });
 };
 const modifyProjectBuildGradle = (config, props) => {
-    //   config = withGradleProperties(config, (config) => {
-    //     AndroidConfig.BuildProperties.updateAndroidBuildProperty(
-    //       config.modResults,
-    //       "android.kotlinVersion",
-    //       "1.7.10"
-    //     );
-    //     return config;
-    //   });
+    config = config_plugins_1.withGradleProperties(config, (config) => {
+        config_plugins_1.AndroidConfig.BuildProperties.updateAndroidBuildProperty(config.modResults, "android.kotlinVersion", "1.6.0");
+        return config;
+    });
     config = config_plugins_1.withProjectBuildGradle(config, (config) => {
         if (!config.modResults.contents.includes("org.jetbrains.kotlin:kotlin-gradle-plugin:")) {
             config.modResults.contents = config.modResults.contents.replace(/dependencies\s?{/, `dependencies {
-          classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.41`);
+          classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.0`);
         }
         return config;
     });
