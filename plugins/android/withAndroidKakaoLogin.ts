@@ -87,15 +87,15 @@ const modifyProjectBuildGradle: ConfigPlugin<KakaoLoginPluginProps> = (
   config,
   props
 ) => {
-  //   config = withGradleProperties(config, (config) => {
-  //     AndroidConfig.BuildProperties.updateAndroidBuildProperty(
-  //       config.modResults,
-  //       "android.kotlinVersion",
-  //       "1.7.10"
-  //     );
+  config = withGradleProperties(config, (config) => {
+    AndroidConfig.BuildProperties.updateAndroidBuildProperty(
+      config.modResults,
+      "android.kotlinVersion",
+      "1.6.0"
+    );
 
-  //     return config;
-  //   });
+    return config;
+  });
 
   config = withProjectBuildGradle(config, (config) => {
     if (
@@ -106,7 +106,7 @@ const modifyProjectBuildGradle: ConfigPlugin<KakaoLoginPluginProps> = (
       config.modResults.contents = config.modResults.contents.replace(
         /dependencies\s?{/,
         `dependencies {
-          classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.41`
+          classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.0`
       );
     }
     return config;
