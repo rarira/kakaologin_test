@@ -22,7 +22,8 @@
         "./plugins/",
         {
           "kakaoAppKey": "7d0c8758bb3f4be83552b9351e3b9a62",
-          "overrideKakaoSDKVersion": "2.9.0"
+          "overrideKakaoSDKVersion": "2.9.0",
+          "kotlinVersion": "1.3.41"
         }
       ]
     ],
