@@ -1,6 +1,6 @@
 {
   "name": "kakaologintest",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "scripts": {
     "start": "expo start --dev-client",
     "android": "expo run:android",
@@ -15,21 +15,21 @@
   "dependencies": {
     "@expo/config-plugins": "^4.1.5",
     "@react-native-seoul/kakao-login": "^4.2.2",
-    "expo": "^44.0.0",
-    "expo-dev-client": "~0.8.6",
-    "expo-splash-screen": "~0.14.1",
-    "expo-status-bar": "~1.2.0",
-    "react": "17.0.1",
-    "react-dom": "17.0.1",
-    "react-native": "0.64.3",
-    "react-native-web": "0.17.1"
+    "expo": "^41.0.0",
+    "expo-dev-client": "~0.6.3",
+    "expo-splash-screen": "~0.10.2",
+    "expo-status-bar": "~1.0.4",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-41.0.0.tar.gz",
+    "react-native-web": "~0.13.12"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9",
-    "@types/react": "~17.0.21",
-    "@types/react-native": "~0.64.12",
+    "@babel/core": "~7.9.0",
+    "@types/react": "~16.9.35",
+    "@types/react-native": "~0.63.2",
     "expo-module-scripts": "^2.0.0",
-    "typescript": "~4.3.5"
+    "typescript": "~4.0.0"
   },
   "private": true
 }
