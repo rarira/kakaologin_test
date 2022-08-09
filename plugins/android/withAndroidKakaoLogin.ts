@@ -91,7 +91,7 @@ const modifyProjectBuildGradle: ConfigPlugin<KakaoLoginPluginProps> = (
     AndroidConfig.BuildProperties.updateAndroidBuildProperty(
       config.modResults,
       "android.kotlinVersion",
-      "1.5.10"
+      props.kotlinVersion ?? "1.5.10"
     );
 
     return config;
@@ -110,7 +110,9 @@ const modifyProjectBuildGradle: ConfigPlugin<KakaoLoginPluginProps> = (
       config.modResults.contents = config.modResults.contents.replace(
         /dependencies\s?{/,
         `dependencies {
-          classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.10'`
+          classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:${
+            props.kotlinVersion ?? "1.5.10"
+          }'`
       );
     }
     return config;
